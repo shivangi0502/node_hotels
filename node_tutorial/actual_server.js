@@ -5,6 +5,10 @@ const app = express();
 //import the db object
 const db = require('./db');
 
+require('dotenv').config();
+
+const PORT = process.env.PORT || 3000;
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
@@ -47,6 +51,8 @@ app.use('/menu', menuItemRoutes);
 
 
 //assingning port number 3000 to app
-app.listen(3000, ()=>{
+
+
+app.listen(PORT, ()=>{
     console.log("listening on port 3000");
 });
