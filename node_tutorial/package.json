@@ -1,0 +1,19 @@
+{
+  "name": "node_tutorial",
+  "version": "1.0.0",
+  "description": "it is a nodejs turorial to create a server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon actual_server.js"
+  },
+  "author": "shivangi verma",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "express": "^5.2.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^9.6.3",
+    "nodemon": "^3.1.14"
+  }
+}
