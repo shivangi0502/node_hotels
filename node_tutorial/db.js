@@ -32,7 +32,7 @@ db.on('error', (err)=>{
 });
 
 db.on('disconnected', ()=>{
-    console,log("disconnected");
+    console.log("disconnected");
 });
 
 

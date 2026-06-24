@@ -1,3 +1,6 @@
+
+require('dotenv').config();
+
 const express = require('express');
 //app is a map to express function or ainstance to express
 const app = express();
@@ -5,15 +8,24 @@ const app = express();
 //import the db object
 const db = require('./db');
 
-require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
 
+const passport = require('./auth');
+app.use(passport.initialize());
+const localAuthMiddleware = passport.authenticate('local',{session:false});
+
+//middleware function
+const logRequest = (req, res, next)=> {
+    console.log(`[${new Date().toLocaleString()}] Request made to ${req.originalUrl}`);
+    next(); //move on to the next phase
+}
+app.use(logRequest);
+
+
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-
-
-
 
 
 
@@ -25,16 +37,15 @@ app.use(bodyParser.json());
 //res = response --- the response the server has to send
 //analogy ---- customer goes to waiter and says '/' then the waiter will tell him 'hello welcome to the hotel!! How can i help you?'
 
-app.get('/', function(req,res){
+
+
+app.get('/',localAuthMiddleware, function(req,res){
     res.send('hello welcome to the hotel!! How can i help you?');
 });
 
 // app.get('/chicken', (req,res)=>{
 //     res.send("yes sir we have many options for chicken to offer");
 // });
-
-
-
 
 
 
@@ -47,6 +58,7 @@ app.use('/person', personRoutes);
 //import the menuitem
 
 const menuItemRoutes = require('./routes/menuItemRoutes');
+const Person = require('./models/Person');
 app.use('/menu', menuItemRoutes);
 
 

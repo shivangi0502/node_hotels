@@ -6,3 +6,4 @@ ansi-regex/
 prompt-sync/
 strip-ansi/
 .package-lock.json
+.env
